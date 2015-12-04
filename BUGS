@@ -1,0 +1,16 @@
+Lots of Unix environment issues to think about?
+
+Can't display full IBM character set when compiled for Dos (slang 
+problem?).
+
+Screen output and refresh could possibly be improved?
+
+No support for SIGWINCH.
+
+The menu code is a little ropey, this needs to be re-done.
+
+Some non-fatal errors still drop out of eg. Error reporting needs
+to be improved.
+
+Filename (tab) completion doesn't work too well under Dos when drive
+letters are involved.

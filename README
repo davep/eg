@@ -1,0 +1,32 @@
+Welcome to Expert Guide, a Norton Guide reader for GNU/Linux[1]
+
+To build eg all you need to do is type 'make'. You will need a copy of the
+slang library installed, if you don't have slang, pop over to
+ftp://space.mit.edu/pub/davis/slang and get it. For those who can't or won't
+get hold of slang I've included a binary of eg that has slang staticly
+linked in.
+
+To install all you need do is type 'make install'. Please check the settings
+at the top of the Makefile before building and/or installing.
+
+Documentation is a little thin on the ground at the moment. There is a man
+page which explains the basics of getting eg running but I still need to
+write a user document. However, anyone who has ever used Norton Guide or
+Expert Help should get to grips with Expert Guide with few problems.
+
+Please direct any feedback to davep@davep.org. The latest version of eg will
+always be available at <URL:http://www.hagbard.demon.co.uk/>.
+
+eg is developed on and for Linux. It should also compile under DOS using
+DJGPP and slang compiled for DJGPP. It may compile on other systems that
+have the slang library. If it does, please let me know. If you had to do
+anything special to make it compile, I'd love a patch off of you.
+
+Please remember to read the files 'Changes', 'BUGS' and 'TODO'.
+
+Hmm, and that's it I think. Have fun.
+
+Footnotes: 
+[1]  And, perhaps, other Unix clones and Unix platforms. If you make it work
+on a different platform please let me know.
+

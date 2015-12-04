@@ -1,0 +1,13 @@
+!short:Welcome to Expert Guide.
+!short:
+!short:If you are reading this the chances are that you've just installed Expert
+!short:Guide. What you are reading is a default guide that was installed for you.
+!short:Press 'v' if you want to see where it was installed (look at the status line
+!short:at the bottom of the terminal).
+!short:
+!short:Press '?' for keyboard usage help.
+!short:
+!short:`man eg' will allow you to read the Expert Guide man page.
+!short:
+!short:Press 'd' for a directory of your guides (by default Expert Guide looks in
+!short:/usr/share/norton-guides and /usr/local/share/norton-guides for guides).

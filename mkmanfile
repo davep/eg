@@ -1,0 +1,59 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+if ( $#ARGV == 0 )
+{
+    if ( $ARGV[ 0 ] =~ /eg-(.+)/ )
+    {
+        my $version = $1;
+        my $date    = localtime();
+
+        open( TEMPLATE, "eg.man.1" ) || die "eg.man.1: $!\n";
+        open( TARGET,   ">eg.1" )    || die "eg.1: $!\n";
+
+        while ( <TEMPLATE> )
+        {
+            if ( /^\s*!MAN_BUGS!\s*$/ )
+            {
+                open( BUGS, "BUGS" ) || die "BUGS: $!\n";
+
+                while ( <BUGS> )
+                {
+                    print TARGET;
+                }
+                
+                close( BUGS );
+            }
+            elsif ( /^\s*!MAN_TODO!\s*$/ )
+            {
+                open( TODO, "TODO" ) || die "TODO: $!\n";
+
+                while ( <TODO> )
+                {
+                    print TARGET;
+                }
+                
+                close( TODO );
+            }
+            else
+            {
+                s/!EG_VERSION!/$version/g;
+                s/!MAN_DATE!/$date/g;
+                
+                print TARGET;
+            }
+        }
+        
+        close( TARGET );
+        close( TEMPLATE );
+    }
+    else
+    {
+        die "\"dir\" in wrong format\n";
+    }
+}
+else
+{
+    die "Need \"dir\" name...\n";
+}

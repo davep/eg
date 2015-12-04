@@ -1,0 +1,17 @@
+Begin3
+Title:          eg - Expert Guide. A Norton Guide Reader 
+Version:        !VERSION!
+Entered-date:   !DATE_ENT!
+Description:    A Linux based Norton Guide reader.
+Keywords:       LINUX EXPERT GUIDE NORTON FLAGSHIP 
+Author:         davep@hagbard.demon.co.uk (Dave Pearson)
+Maintained-by:  davep@hagbard.demon.co.uk (Dave Pearson)
+Primary-site:   sunsite.unc.edu /pub/Linux/apps/doctools
+                !FILE_SIZE! !FILE_NAME!
+Alternate-site: http://www.acemake.com/hagbard/
+                http://www.hagbard.demon.co.uk/
+Original-site:  
+Platforms:      Linux (requires S-Lang library) 
+                DOS (DJGPP, requires S-Lang library)
+Copying-policy: GPL 2.0
+End

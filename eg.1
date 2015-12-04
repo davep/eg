@@ -1,0 +1,76 @@
+.TH eg 1 "Tue Jul  4 14:18:48 2000" "Version 1.00" "Expert Guide"
+.SH NAME
+eg \- Expert Guide. A Norton Guide Reader.
+.SH SYNOPSIS
+\fBeg\fP [options] [norton\-guide]
+.SH DESCRIPTION
+\fBeg\fP is a text mode, full screen Norton Guide reader.
+.SS OPTIONS
+.TP
+\fI\-h\fP
+Display help text.
+.TP
+\fI\-p\fP \fIguide\-path\fP
+Sets the search path in which eg should look for Norton Guides when
+building it's guide database. If you specify the path on the command
+line it overrides the \fBEG_PATH\fP environment variable.
+.TP
+\fI\-s\fP
+Use a "sane" display. Expert Guide will attempt to guess if it can
+use the fullest range of IBM extended characters when displaying
+the contents of a guide entry. Somtimes it may guess wrong. If it
+does, pass \fI\-s\fP to force it into a "sane" display mode.
+.TP
+\fI\-v\fP
+Display version details.
+.SH ENVIRONMENT
+.TP
+\fBEG_PATH\fP
+Holds the path in which \fBeg\fP looks for Norton Guides when you ask
+for a directory listing. This should be a "normal" path with each
+directory location seperated with a ":" (or a ";" if running under
+DOS).
+.SH NOTES
+The first time you run eg you will need to point it to a specific
+Norton Guide. After that eg will remember the guide you last read
+and the entry in that guide you were last reading.
+.SH BUGS
+Lots of Unix environment issues to think about?
+
+Can't display full IBM character set when compiled for Dos (slang 
+problem?).
+
+Screen output and refresh could possibly be improved?
+
+No support for SIGWINCH.
+
+The menu code is a little ropey, this needs to be re-done.
+
+Some non-fatal errors still drop out of eg. Error reporting needs
+to be improved.
+
+Filename (tab) completion doesn't work too well under Dos when drive
+letters are involved.
+.SH TODO
+o Guide wide searching.
+o Re-write based around a Norton Guide reading library.
+o Using the library write a gnome oriented version of EG.
+
+
+.SH AUTHOR
+Dave Pearson <davep@davep.org>
+.SH HOMEPAGE
+.nf
+http://www.hagbard.demon.co.uk/
+http://www.acemake.com/hagbard/
+.fi
+.SH FILES
+.TP
+~/.egrc
+User configuration file.
+.TP
+~/.eglast 
+Remembers last read file and last position in that file.
+.TP
+~/.egdir
+Norton guide directory "cache".
