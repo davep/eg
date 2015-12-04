@@ -20,8 +20,8 @@
 ######################################################################
 CC=gcc
 #CFLAGS=-Wall -g -O2 -DDEBUG
-CFLAGS=-Wall -O2
-DLIBS=-lslang
+CFLAGS=-Wall -O2 -I/usr/local/include
+DLIBS= -L/usr/local/lib -lslang
 BINDIR=/usr/bin
 MANDIR=/usr/man
 NGDIR=/usr/share/norton-guides
