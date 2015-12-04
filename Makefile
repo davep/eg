@@ -20,7 +20,7 @@
 ######################################################################
 CC=gcc
 #CFLAGS=-Wall -g -O2 -DDEBUG
-CFLAGS=-Wall -s -O2
+CFLAGS=-Wall -O2
 DLIBS=-lslang
 BINDIR=/usr/bin
 MANDIR=/usr/man
