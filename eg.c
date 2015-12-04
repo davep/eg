@@ -20,7 +20,7 @@
 */
 
 #include <stdio.h>
-#include <slang/slang.h>
+#include <slang.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/utsname.h>

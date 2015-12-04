@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
-#include <slang/slang.h>
+#include <slang.h>
 
 #include "eg.h"
 
