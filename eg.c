@@ -57,7 +57,7 @@ int main( int argc, char **argv )
     {
         /* If there isn't a path setting in the environment use the
            following as the default. */
-        GuidePath( "/usr/share/norton-guides:/usr/local/share/norton-guides" );
+        GuidePath( "/usr/local/share/norton-guides:/usr/share/norton-guides" );
     }
 #endif
 
