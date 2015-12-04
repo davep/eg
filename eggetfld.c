@@ -20,7 +20,7 @@
 */
 
 #include <stdio.h>
-#include <slang/slang.h>
+#include <slang.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>

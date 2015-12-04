@@ -25,7 +25,7 @@
 #include <sys/types.h>
 #endif
 #include <regex.h>
-#include <slang/slang.h>
+#include <slang.h>
 #include <stdlib.h>
 
 #include "eg.h"

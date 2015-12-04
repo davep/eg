@@ -21,7 +21,7 @@
 
 #include <pwd.h>
 #include <stdio.h>
-#include <slang/slang.h>
+#include <slang.h>
 #include <errno.h>
 #include <ctype.h>
 #include <string.h>

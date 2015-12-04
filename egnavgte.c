@@ -19,7 +19,7 @@
 
 */
 
-#include <slang/slang.h>
+#include <slang.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <limits.h>
