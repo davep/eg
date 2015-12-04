@@ -14,7 +14,6 @@ mkdir $EGDIR/default-guide
 cp *.[ch]          $EGDIR
 cp Makefile        $EGDIR
 cp mktarfile       $EGDIR
-cp mklsmfile       $EGDIR
 cp mkmanfile       $EGDIR
 cp README          $EGDIR
 cp COPYING         $EGDIR
@@ -24,7 +23,6 @@ cp BUGS            $EGDIR
 cp eg.spec         $EGDIR
 cp eg-$EGVER.spec  $EGDIR
 cp eg              $EGDIR
-cp eg.lsm          $EGDIR
 cp eg.1            $EGDIR
 cp eg.man.1        $EGDIR
 cp default-guide/* $EGDIR/default-guide
@@ -36,5 +34,3 @@ rmdir  $EGDIR
 
 mkdir -p release
 mv $EGDIR.tar.gz release/
-
-./mklsmfile $EGDIR
