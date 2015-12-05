@@ -27,6 +27,7 @@ Please remember to read the files 'Changes', 'BUGS' and 'TODO'.
 Hmm, and that's it I think. Have fun.
 
 Footnotes: 
-[1]  And, perhaps, other Unix clones and Unix platforms. If you make it work
+[1]  And, perhaps, other Unix clones and Unix platforms[2]. If you make it work
 on a different platform please let me know.
 
+[2]  Including OS X, as of December 2015.
