@@ -5,9 +5,6 @@ EGDIR="eg-$EGVER"
 
 ./mkmanfile $EGDIR
 
-rm -f eg-*.spec
-cat eg.spec | sed -e "s/\\\$VERSION\\$/$EGVER/g" > eg-$EGVER.spec
-
 mkdir $EGDIR
 mkdir $EGDIR/default-guide
 
@@ -20,8 +17,6 @@ cp COPYING         $EGDIR
 cp Changes         $EGDIR
 cp TODO            $EGDIR
 cp BUGS            $EGDIR
-cp eg.spec         $EGDIR
-cp eg-$EGVER.spec  $EGDIR
 cp eg              $EGDIR
 cp eg.1            $EGDIR
 cp eg.man.1        $EGDIR
