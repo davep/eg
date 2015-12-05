@@ -2,7 +2,7 @@ Welcome to Expert Guide, a Norton Guide reader for GNU/Linux[1]
 
 To build eg all you need to do is type 'make'. You will need a copy of the
 slang library installed, if you don't have slang, pop over to
-ftp://space.mit.edu/pub/davis/slang and get it. For those who can't or won't
+http://www.jedsoft.org/slang/ and get it. For those who can't or won't
 get hold of slang I've included a binary of eg that has slang staticly
 linked in.
 
