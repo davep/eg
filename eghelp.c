@@ -1,7 +1,7 @@
 /*
 
      Expert Guide - A Text Mode Norton Guide Reader
-     Copyright (C) 1997,1998,1999,2000 David A Pearson
+     Copyright (C) 1997-2015 David A Pearson
    
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ void DisplayHelp( PNG ng )
     SLsmg_gotorc( iTop + 1, iLeft + 1 );
     SLsmg_write_string( "Expert Guide v" EG_VERSION );
     SLsmg_gotorc( iTop + 2, iLeft + 1 );
-    SLsmg_write_string( "Copyright (C) 1997-2000 David A Pearson <davep@davep.org>" );
+    SLsmg_write_string( "Copyright (C) 1997-2015 David A Pearson <davep@davep.org>" );
     
     SLsmg_gotorc( iTop + 3, iLeft + 1 );
     SLsmg_draw_hline( iWidth - 2 );

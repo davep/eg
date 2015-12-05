@@ -1,7 +1,7 @@
 /*
 
      Expert Guide - A Text Mode Norton Guide Reader
-     Copyright (C) 1997,1998,1999,2000 David A Pearson
+     Copyright (C) 1997-2015 David A Pearson
    
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -176,7 +176,7 @@ static void ShowVersionInfo( void )
     printf( "Expert Guide Version " EG_VERSION "\n\n"
             "\
      Expert Guide - A Text Mode Norton Guide Reader\
-     Copyright (C) 1997,1998,1999,2000 David A Pearson\
+     Copyright (C) 1997-2015 David A Pearson\
 \
      This program is free software; you can redistribute it and/or modify\
      it under the terms of the GNU General Public License as published by\
