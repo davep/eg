@@ -190,7 +190,7 @@ void GetStrZ( PNG ng, char *pszBuffer, int iMax )
     for ( i = 0; i < iMax && !fEOS; i++, pszBuffer++ )
     {
         *pszBuffer = NG_DECRYPT( *pszBuffer );
-	fEOS       = ( *pszBuffer == 0 );
+        fEOS       = ( *pszBuffer == 0 );
     }
 
     fseek( ng->file, (long) lSavPos + i, SEEK_SET );

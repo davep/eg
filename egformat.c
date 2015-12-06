@@ -205,22 +205,22 @@ static int Hex2Byte( char *psz )
     
     for ( i = 0; i < 2; i++, psz++ )
     {
-	*psz = (char) toupper( *psz );
-	
-	if ( *psz > '/' && *psz < ':' )
-	{
-	    iByte = ( ( (int) *psz ) - '0' );
-	}
-	else if ( *psz > '@' && *psz < 'G' )
-	{
-	    iByte = ( ( (int) *psz ) - '7' );
-	}
+        *psz = (char) toupper( *psz );
+        
+        if ( *psz > '/' && *psz < ':' )
+        {
+            iByte = ( ( (int) *psz ) - '0' );
+        }
+        else if ( *psz > '@' && *psz < 'G' )
+        {
+            iByte = ( ( (int) *psz ) - '7' );
+        }
         else
         {
             iByte = 0;
         }
-	
-	bByte += ( iByte * ( !i ? 16 : 1 ) );
+        
+        bByte += ( iByte * ( !i ? 16 : 1 ) );
     }
     
     return( (int) bByte );
