@@ -68,8 +68,10 @@ tags:
 tarfile: veryclean
 	./mktarfile
 
-install: 
+install: eg
+	$(INSTALL) -d $(BINDIR)
 	$(INSTALL) eg $(BINDIR)
+	$(INSTALL) -d $(MANDIR)/man1
 	$(INSTALL) eg.1 $(MANDIR)/man1
 	$(INSTALL) -d $(NGDIR)
 	$(INSTALL) default-guide/eg.ng $(NGDIR)
