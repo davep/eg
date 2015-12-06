@@ -78,16 +78,16 @@ void cfgAddOption( char *pszId, char *pszValue )
 
     if ( !cfgOptions )
     {
-	cfgOptions = (cfgOPTIONS *) calloc( sizeof( cfgOPTIONS ), 1 );
-	cfgOptions->next = NULL;
-	p = cfgOptions;
+        cfgOptions = (cfgOPTIONS *) calloc( sizeof( cfgOPTIONS ), 1 );
+        cfgOptions->next = NULL;
+        p = cfgOptions;
     }
     else
     {
-	p       = cfgLastOption( cfgOptions );
-	p->next = (cfgOPTIONS *) calloc( sizeof( cfgOPTIONS ), 1 );
-	p       = p->next;
-	p->next = NULL;
+        p       = cfgLastOption( cfgOptions );
+        p->next = (cfgOPTIONS *) calloc( sizeof( cfgOPTIONS ), 1 );
+        p       = p->next;
+        p->next = NULL;
     }
 
     p->id    = (char *) malloc( strlen( pszId ) + 1 );
@@ -109,20 +109,20 @@ int cfgReadFile( char *pszFile )
 
     if ( f != NULL )
     {
-	while ( fgets( szBuffer, sizeof( szBuffer ), f ) )
-	{
-	    szBuffer[ strlen( szBuffer ) - 1 ] = 0;
-	    if ( *szBuffer && *szBuffer != ';' && *szBuffer != '#' )
-	    {
-		char *pszSplit = szBuffer;
+        while ( fgets( szBuffer, sizeof( szBuffer ), f ) )
+        {
+            szBuffer[ strlen( szBuffer ) - 1 ] = 0;
+            if ( *szBuffer && *szBuffer != ';' && *szBuffer != '#' )
+            {
+                char *pszSplit = szBuffer;
 
-		while ( *pszSplit && *pszSplit != '=' )
-		{
-		    ++pszSplit;
-		}
+                while ( *pszSplit && *pszSplit != '=' )
+                {
+                    ++pszSplit;
+                }
 
-		if ( *pszSplit )
-		{
+                if ( *pszSplit )
+        	{
 		    *pszSplit = 0;
 		    ++pszSplit;
 		    
