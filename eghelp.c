@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -33,7 +33,7 @@ void DisplayHelp( PNG ng )
     int iLeft    = ( SLtt_Screen_Cols / 2 ) - ( iWidth  / 2 );
     int iGHlpTop = iTop + iHeight - 7;
     int i;
-    
+
     SLsmg_set_color( iColourHelp );
     SLsmg_fill_region( iTop, iLeft, iHeight, iWidth, ' ' );
     SLsmg_draw_box( iTop, iLeft, iHeight, iWidth );
@@ -46,7 +46,7 @@ void DisplayHelp( PNG ng )
     SLsmg_write_string( "Expert Guide v" EG_VERSION );
     SLsmg_gotorc( iTop + 2, iLeft + 1 );
     SLsmg_write_string( "Copyright (C) 1997-2015 David A Pearson <davep@davep.org>" );
-    
+
     SLsmg_gotorc( iTop + 3, iLeft + 1 );
     SLsmg_draw_hline( iWidth - 2 );
     SLsmg_draw_object( iTop + 3, iLeft, SLSMG_LTEE_CHAR );
@@ -74,12 +74,12 @@ void DisplayHelp( PNG ng )
     SLsmg_write_string( "      v   Show eg version and guide filename" );
     SLsmg_gotorc( iTop + 12, iLeft + 1 );
     SLsmg_write_string( "  F10 0   Quick exit" );
-    
+
     SLsmg_gotorc( iTop + 4, iLeft + 9 );
     SLsmg_draw_vline( iGHlpTop - ( iTop + 4 ) );
     SLsmg_draw_object( iTop + 3, iLeft + 9, SLSMG_UTEE_CHAR );
     SLsmg_draw_object( iGHlpTop, iLeft + 9, SLSMG_DTEE_CHAR );
-    
+
     for ( i = 0; i < 5; i++ )
     {
         int  iCol = iLeft + 1;
@@ -90,9 +90,9 @@ void DisplayHelp( PNG ng )
             SaneDisplay( iGHlpTop + 1 + i, iCol++, *p++ );
         }
     }
-    
+
     SLsmg_gotorc( SLtt_Screen_Rows - 1, SLtt_Screen_Cols - 1 );
-    
+
     SLsmg_refresh();
 
     SLkp_getkey();

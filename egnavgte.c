@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -69,16 +69,16 @@ int Navigate( PNG ng, int iFirstTime )
         /* Nope, find the first short or long entry and read that. */
         ReadFirstEntry( ng );
     }
-    
+
     DrawEntry( ng, 0 );
-    
+
     while ( !iExit )
     {
         if ( !pSeeAlso )
         {
             DrawMenu( ng, iMenu, 0 );
         }
-        
+
         if ( !ng->entry->iLong && !iMenu )
         {
             ShowNormal( ng, ng->entry->iLast );
@@ -86,7 +86,7 @@ int Navigate( PNG ng, int iFirstTime )
         }
 
         SLsmg_gotorc( SLtt_Screen_Rows - 1, SLtt_Screen_Cols - 1 );
-        
+
         SLsmg_refresh();
 
         if ( iStuffKey )
@@ -113,11 +113,11 @@ int Navigate( PNG ng, int iFirstTime )
                     DisplayHelp( ng );
                 }
                 break;
-            
+
             case SL_KEY_F( 10 ) : /* Quick exit */
             case '0' :
             case 'x' :
-            
+
                 if ( !iMenu )
                 {
                     iExit   = 1;
@@ -128,7 +128,7 @@ int Navigate( PNG ng, int iFirstTime )
             case SL_KEY_UP :    /* Up one line */
             case 'K' :
             case 'k' :
-            
+
                 if ( ng->entry->iLong && !iMenu )
                 {
                     if ( ng->entry->iVisTop )
@@ -167,7 +167,7 @@ int Navigate( PNG ng, int iFirstTime )
             case SL_KEY_DOWN :  /* Down one line */
             case 'J' :
             case 'j' :
-            
+
                 if ( ng->entry->iLong && !iMenu )
                 {
                     if ( ng->entry->iVisBtm <  ( ng->entry->iLines - 1 ) )
@@ -213,21 +213,21 @@ int Navigate( PNG ng, int iFirstTime )
                     {
                         iMenu = ng->header->iMenuCount - 1;
                     }
-                
+
                     if ( pegMenu )
                     {
                         KillEgMenu( pegMenu );
                         pegMenu = (PEGMENU) NULL;
                         DrawEntry( ng, 0 );
                     }
-                
+
                     if ( iMenu )
                     {
                         pegMenu = NewEgMenu( ng, iMenu );
                         DropMenu( pegMenu );
                     }
                 }
-            
+
                 break;
 
             case SL_KEY_RIGHT :     /* Menu right */
@@ -255,9 +255,9 @@ int Navigate( PNG ng, int iFirstTime )
                         DropMenu( pegMenu );
                     }
                 }
-            
+
                 break;
-            
+
             case SL_KEY_HOME :  /* Top of page/menu */
             case '<' :
 
@@ -269,12 +269,12 @@ int Navigate( PNG ng, int iFirstTime )
                 {
                     ng->entry->iLast    = ng->entry->iCurrent;
                     ng->entry->iCurrent = 0;
-            
+
                     if ( ng->entry->iCurrent < ng->entry->iVisTop )
                     {
                         GoHome( ng );
                     }
-            
+
                     DrawEntry( ng, 0 );
 
                     iSearch = ng->entry->iVisTop;
@@ -297,7 +297,7 @@ int Navigate( PNG ng, int iFirstTime )
                     {
                         GoEnd( ng );
                     }
-            
+
                     DrawEntry( ng, 0 );
 
                     iSearch = ng->entry->iLong ? ng->entry->iVisTop : ng->entry->iCurrent;
@@ -308,7 +308,7 @@ int Navigate( PNG ng, int iFirstTime )
             case 0x02 :
             case 'B' :
             case 'b' :
-            
+
                 if ( iMenu )
                 {
                     MenuHome( pSeeAlso ? pSeeAlso : pegMenu );
@@ -317,16 +317,16 @@ int Navigate( PNG ng, int iFirstTime )
                 {
                     PageUp( ng );
                     DrawEntry( ng, 0 );
-                
+
                     iSearch = ng->entry->iLong ? ng->entry->iVisTop : ng->entry->iCurrent;
                 }
                 break;
-            
+
             case SL_KEY_NPAGE : /* Page down (bottom of menu) */
             case 0x06 :
             case 'F' :
             case 'f' :
-            
+
                 if ( iMenu )
                 {
                     MenuEnd( pSeeAlso ? pSeeAlso : pegMenu );
@@ -335,17 +335,17 @@ int Navigate( PNG ng, int iFirstTime )
                 {
                     PageDown( ng );
                     DrawEntry( ng, 0 );
-                
+
                     iSearch = ng->entry->iLong ? ng->entry->iVisTop : ng->entry->iCurrent;
                 }
                 break;
 
             case '-' :          /* Previous long entry */
-            
+
                 if ( ng->entry->lPrevious && !iMenu )
                 {
                     lPrevious = ng->entry->lAddress;
-                
+
                     ReadEntry( ng, ng->entry->lPrevious );
                     DrawEntry( ng, 0 );
 
@@ -354,11 +354,11 @@ int Navigate( PNG ng, int iFirstTime )
                 break;
 
             case '+' :          /* Next long entry */
-            
+
                 if ( ng->entry->lNext && !iMenu )
                 {
                     lPrevious = ng->entry->lAddress;
-                
+
                     ReadEntry( ng, ng->entry->lNext );
                     DrawEntry( ng, 0 );
 
@@ -383,14 +383,14 @@ int Navigate( PNG ng, int iFirstTime )
                 else if ( ng->entry->lParent > 0 )
                 {
                     int iJumpLine = ng->entry->iParentLine;
-                
+
                     ReadEntry( ng, ng->entry->lParent );
 
                     if ( iJumpLine > -1 && iJumpLine < 0xFFFF )
                     {
                         JumpToLine( ng, iJumpLine );
                     }
-                
+
                     DrawEntry( ng, 0 );
 
                     iSearch = iJumpLine;
@@ -402,14 +402,14 @@ int Navigate( PNG ng, int iFirstTime )
 
                     iSearch = 0;
                 }
-                else 
+                else
                 {
                     SLsmg_cls();
                     SLsmg_refresh();
                     iExit   = 1;
                     iExitEG = 1;
                 }
-            
+
                 break;
 
             case '\r' :         /* Select short entry/menu item */
@@ -421,7 +421,7 @@ int Navigate( PNG ng, int iFirstTime )
                                     ng->menus[ iMenu ]->entries[ pegMenu->iCurrent ].lOffset ) )
                     {
                         lPrevious = ng->entry->lAddress;
-            
+
                         if ( pSeeAlso )
                         {
                             ReadEntry( ng, ng->entry->pSeeAlso->entries[ pSeeAlso->iCurrent ].lOffset );
@@ -435,12 +435,12 @@ int Navigate( PNG ng, int iFirstTime )
                     {
                         ShowError( "Menu item does not point to a valid Guide entry!" );
                     }
-                
+
                     KillEgMenu( pSeeAlso ? pSeeAlso : pegMenu );
                     iMenu    = 0;
                     pegMenu  = (PEGMENU) NULL;
                     pSeeAlso = (PEGMENU) NULL;
-                
+
                     DrawEntry( ng, 0 );
                 }
                 else if ( !ng->entry->iLong )
@@ -448,7 +448,7 @@ int Navigate( PNG ng, int iFirstTime )
                     if ( IsNgEntry( ng, ng->entry->offsets[ ng->entry->iCurrent ] ) )
                     {
                         lPrevious = ng->entry->lAddress;
-                    
+
                         ReadEntry( ng, ng->entry->offsets[ ng->entry->iCurrent ] );
                         DrawEntry( ng, 0 );
                     }
@@ -456,7 +456,7 @@ int Navigate( PNG ng, int iFirstTime )
                 else if ( ng->entry->iSeeAlso )
                 {
                     lPrevious = ng->entry->lAddress;
-                
+
                     pSeeAlso = NewEgMenuSeeAlso( ng );
                     iMenu    = 1;
 
@@ -464,15 +464,15 @@ int Navigate( PNG ng, int iFirstTime )
                 }
 
                 iSearch = 0;
-            
+
                 break;
 
             case '|' :          /* Pipe page via... */
-            
+
                 if ( !iMenu )
                 {
                     char szPipeCmd[ _POSIX_PATH_MAX ] = "";
-                
+
                     if ( GetField( "Pipe", szPipeCmd, sizeof( szPipeCmd ), EG_GF_DEFA ) )
                     {
                         if ( *szPipeCmd )
@@ -490,19 +490,19 @@ int Navigate( PNG ng, int iFirstTime )
                 break;
 
             case ' ' :          /* Simple text search */
-            
+
                 if ( !iMenu )
                 {
                     if ( iReSearch ? 1 : GetField( "Search", szSearch, sizeof( szSearch ), EG_GF_DEFA ) )
                     {
                         iReSearch = 0;
-                        
+
                         if ( *szSearch )
                         {
                             int iLine = SimpleTextSearch( ng, szSearch, iSearch );
 
                             iLastSearch = iKey;
-                            
+
                             if ( iLine > -1 )
                             {
                                 JumpToLine( ng, iLine );
@@ -512,7 +512,7 @@ int Navigate( PNG ng, int iFirstTime )
                                 {
                                     ShowHigh( ng, iLine );
                                 }
-                            
+
                                 if ( iLine < ng->entry->iLines )
                                 {
                                     iSearch = iLine + 1;
@@ -528,20 +528,20 @@ int Navigate( PNG ng, int iFirstTime )
                                 {
                                     ShowNormal( ng, iSearch - 1 );
                                 }
-                            
+
                                 iSearch = 0;
-                            
+
                                 ShowError( "Not found" );
                             }
                         }
                     }
                 }
-            
+
                 break;
 
             case '\\' :         /* Regular expression search */
             case '/' :
-            
+
                 if ( !iMenu )
                 {
                     if ( iReSearch ? 1 : GetField( iKey == '/' ? "RegExp(ci)" : "RegExp",
@@ -549,13 +549,13 @@ int Navigate( PNG ng, int iFirstTime )
                                                    EG_GF_DEFA ) )
                     {
                         iReSearch = 0;
-                            
+
                         if ( *szRxSearch )
                         {
                             int iLine = RegExSearch( ng, szRxSearch, iSearch, iKey == '/' );
 
                             iLastSearch = iKey;
-                            
+
                             if ( iLine > -1 )
                             {
                                 JumpToLine( ng, iLine );
@@ -565,7 +565,7 @@ int Navigate( PNG ng, int iFirstTime )
                                 {
                                     ShowHigh( ng, iLine );
                                 }
-                            
+
                                 if ( iLine < ng->entry->iLines )
                                 {
                                     iSearch = iLine + 1;
@@ -581,7 +581,7 @@ int Navigate( PNG ng, int iFirstTime )
                                 {
                                     ShowNormal( ng, iSearch - 1 );
                                 }
-                            
+
                                 iSearch = 0;
 
                                 if ( iLine == -1 )
@@ -600,7 +600,7 @@ int Navigate( PNG ng, int iFirstTime )
                 iStuffKey = iLastSearch;
                 iReSearch = 1;
                 break;
-                
+
             case 'S' :          /* Save page to file */
             case 's' :
             case 'w' :
@@ -608,7 +608,7 @@ int Navigate( PNG ng, int iFirstTime )
                 if ( !iMenu )
                 {
                     char szSaveTo[ _POSIX_PATH_MAX ] = "";
-                
+
                     if ( GetField( iKey == 'S' ? "Save Raw To" :
                                    iKey == 's' ? "Save Text To" :
                                    "Save Source To", szSaveTo, sizeof( szSaveTo ),
@@ -690,18 +690,18 @@ int Navigate( PNG ng, int iFirstTime )
 static void JumpToLine( PNG ng, int iLine )
 {
     int iPage = DisplayRows() - 1;
-    
+
     ng->entry->iCurrent = iLine;
     ng->entry->iLast    = iLine;
 
     if ( ng->entry->iLines > iPage )
     {
         int ihPage = iPage / 2;
-        
+
         ng->entry->iVisTop = iLine - ihPage;
         ng->entry->iVisBtm = ng->entry->iVisTop + iPage;
     }
-    
+
     if ( ng->entry->iVisTop < 0 )
     {
         ng->entry->iVisTop = 0;

@@ -22,7 +22,7 @@ if ( $#ARGV == 0 )
                 {
                     print TARGET;
                 }
-                
+
                 close( BUGS );
             }
             elsif ( /^\s*!MAN_TODO!\s*$/ )
@@ -33,18 +33,18 @@ if ( $#ARGV == 0 )
                 {
                     print TARGET;
                 }
-                
+
                 close( TODO );
             }
             else
             {
                 s/!EG_VERSION!/$version/g;
                 s/!MAN_DATE!/$date/g;
-                
+
                 print TARGET;
             }
         }
-        
+
         close( TARGET );
         close( TEMPLATE );
     }

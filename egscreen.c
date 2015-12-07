@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -51,7 +51,7 @@ int iColourHelp  = HI_WHITE_CYAN;
 void InitScreen( int iFirstTime )
 {
     /* Get slang up and going */
-    
+
     SLtt_get_terminfo();
     SLang_init_tty( 3, 0, 0 );
     SLsmg_init_smg();
@@ -94,13 +94,13 @@ void DrawBackground( PNG ng, int iRefresh )
                       ( strlen( ng->header->szTitle ) / 2 ) );
         SLsmg_write_string( ng->header->szTitle );
     }
-    
+
     SLsmg_set_color( iColourMenu );
     SLsmg_fill_region( SLtt_Screen_Rows - 1, 0, 1, SLtt_Screen_Cols, ' ' );
 
     SLsmg_set_color( iColourNorm );
     SLsmg_fill_region( 1, 1, SLtt_Screen_Rows - 3, SLtt_Screen_Cols - 2, ' ' );
-    
+
     DrawMenu( ng, 0, 0 );
 
     if ( iRefresh )
@@ -129,7 +129,7 @@ void DrawMenu( PNG ng, int iSelected, int iRefresh )
                 SLsmg_set_color( iSelected == i ? iColourBar : iColourMenu );
                 SLsmg_gotorc( 1, iCol );
                 SLsmg_write_string( ng->menus[ i ]->szName );
-            
+
                 iCol += strlen( ng->menus[ i ]->szName ) + 2;
             }
         }
@@ -140,7 +140,7 @@ void DrawMenu( PNG ng, int iSelected, int iRefresh )
             SLsmg_write_string( "See also" );
         }
     }
-    
+
     if ( iRefresh )
     {
         SLsmg_refresh();
@@ -218,7 +218,7 @@ void ShowStdMsg( iRefresh )
 
     sprintf( pszMsg, "eg v%s: %s", EG_VERSION,
              CurrentGuide( NULL ) );
-    
+
     DisplayMessage( pszMsg, iRefresh );
 
     free( pszMsg );
@@ -281,7 +281,7 @@ static void WriteMessage( char *pszMsg, int iColour )
         SLsmg_set_color( iColour );
         SLsmg_gotorc( SLtt_Screen_Rows - 1, 0 );
         SLsmg_write_string( pszMsg );
-        
+
         free( psz );
     }
 
@@ -326,7 +326,7 @@ static void InitColours( void )
         iColourMsg   = 9;
         iColourError = 10;
         iColourHelp  = 11;
-        
+
         SLtt_set_mono( iColourNorm,  "", 0 );
         SLtt_set_mono( iColourSele,  "", SLTT_REV_MASK );
         SLtt_set_mono( iColourBold,  "", SLTT_BOLD_MASK );
