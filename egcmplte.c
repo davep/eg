@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -77,16 +77,16 @@ int CompleteFilename( char *pszFile )
     if ( !( iCompleted = DirHasSingleEntry( szDir, szFile ) ) && *szFile )
     {
         DIR *dir;
-        
+
         if ( ( dir = opendir( szDir ) ) )
         {
             char          szHit[ _POSIX_PATH_MAX ] = "";
             struct dirent *de;
-            
+
             while ( ( de = readdir( dir ) ) )
             {
                 if (
-#ifdef DJGPP                    
+#ifdef DJGPP
                     strnicmp
 #else
                     strncmp
@@ -100,7 +100,7 @@ int CompleteFilename( char *pszFile )
                     else
                     {
                         int i;
-                        
+
                         for ( i = 0; szHit[ i ] && de->d_name[ i ]; i++ )
                         {
                             if ( szHit[ i ] != de->d_name[ i ] )
@@ -110,30 +110,30 @@ int CompleteFilename( char *pszFile )
                             }
                         }
                     }
-                    
+
                     ++iCompleted;
                 }
             }
-            
+
             if ( *szHit )
             {
                 strcpy( szFile, szHit );
             }
-            
+
             closedir( dir );
         }
     }
-    
+
     if ( iCompleted )
     {
         if ( iCompleted == 1 )
         {
             DirTidy( szDir, szFile );
         }
-        
+
         sprintf( pszFile, "%s" SLASHS "%s", szDir, szFile );
     }
-    
+
     CompressPath( pszFile );
 
     return( strcmp( szOrig, pszFile ) == 0 &&
@@ -156,7 +156,7 @@ static int DirHasSingleEntry( char *pszDir, char *pszFile )
             char          szEntry[ _POSIX_PATH_MAX ];
             struct dirent *de;
             int           iEntries = 0;
-            
+
             while ( ( de = readdir( dir ) ) && iEntries < 2 )
             {
                 if ( strcmp( ".", de->d_name ) != 0 &&
@@ -172,11 +172,11 @@ static int DirHasSingleEntry( char *pszDir, char *pszFile )
                 strcpy( pszFile, szEntry );
                 iSingle = 1;
             }
-            
+
             closedir( dir );
         }
     }
-    
+
     return( iSingle );
 }
 
@@ -186,7 +186,7 @@ static int DirHasSingleEntry( char *pszDir, char *pszFile )
 int DirTidy( char *szDir, char *szFile )
 {
     int iTidy = 0;
-    
+
     if ( *szFile )
     {
         char        szTest[ _POSIX_PATH_MAX ];
@@ -200,7 +200,7 @@ int DirTidy( char *szDir, char *szFile )
         {
             sprintf( szTest, "%s" SLASHS "%s", szDir, szFile );
         }
-        
+
         if ( stat( szTest, &s ) == 0 )
         {
             if ( S_ISDIR( s.st_mode ) )

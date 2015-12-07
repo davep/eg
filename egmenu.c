@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -30,7 +30,7 @@ static void CalcWindowSize( PNG, int, PEGMENU );
 static void CalcSAWindowSize( PNG, PEGMENU );
 static int  CalcMenuLeftSide( PNG, int );
 static void RefreshMenu( PEGMENU );
-    
+
 /*
  */
 
@@ -43,7 +43,7 @@ PEGMENU NewEgMenu( PNG ng, int iMenu )
     CalcWindowSize( ng, iMenu, pegMenu );
 
     pegMenu->iCurrent = pegMenu->iPrevious = 0;
-    
+
     return( pegMenu );
 }
 
@@ -59,7 +59,7 @@ PEGMENU NewEgMenuSeeAlso( PNG ng )
     CalcSAWindowSize( ng, pegMenu );
 
     pegMenu->iCurrent = pegMenu->iPrevious = 0;
-    
+
     return( pegMenu );
 }
 
@@ -77,7 +77,7 @@ void KillEgMenu( PEGMENU pegMenu )
 void DropMenu( PEGMENU pegMenu )
 {
     int iOption;
-    
+
     SLsmg_set_color( iColourMenu );
     SLsmg_draw_box( pegMenu->iTop, pegMenu->iLeft,
                     pegMenu->iHeight, pegMenu->iWidth );
@@ -93,7 +93,7 @@ void DropMenu( PEGMENU pegMenu )
     SLsmg_set_color( iColourBar );
     SLsmg_fill_region( pegMenu->iTop + pegMenu->iCurrent + 1,
                        pegMenu->iLeft + 1, 1, pegMenu->iWidth - 2, ' ' );
-                       
+
     SLsmg_gotorc( pegMenu->iTop + pegMenu->iCurrent + 1, pegMenu->iLeft + 2 );
     WriteStringSane( pegMenu->pngMenu->entries[ pegMenu->iCurrent ].szName );
 }
@@ -135,7 +135,7 @@ void MenuHome( PEGMENU pegMenu )
 {
     pegMenu->iPrevious = pegMenu->iCurrent;
     pegMenu->iCurrent  = 0;
-    
+
     RefreshMenu( pegMenu );
 }
 
@@ -158,7 +158,7 @@ static void CalcWindowSize( PNG ng, int iMenu, PEGMENU pegMenu )
     int iWidth = 0;
     int iThisWidth;
     int iItem;
-    
+
     pegMenu->iTop    = 2;
     pegMenu->iLeft   = CalcMenuLeftSide( ng, iMenu );
     pegMenu->iHeight = ng->menus[ iMenu ]->iEntries + 1;
@@ -174,7 +174,7 @@ static void CalcWindowSize( PNG ng, int iMenu, PEGMENU pegMenu )
     }
 
     pegMenu->iWidth = iWidth + 4;
-    
+
     if ( ( pegMenu->iLeft + pegMenu->iWidth ) > SLtt_Screen_Cols )
     {
         pegMenu->iLeft -= ( ( ( pegMenu->iLeft + pegMenu->iWidth ) + 1 ) -
@@ -190,7 +190,7 @@ static void CalcSAWindowSize( PNG ng, PEGMENU pegMenu )
     int iWidth = 0;
     int iThisWidth;
     int iItem;
-    
+
     pegMenu->iTop    = 2;
     pegMenu->iLeft   = 1;
     pegMenu->iHeight = ng->entry->pSeeAlso->iEntries + 1;
@@ -232,16 +232,14 @@ static void RefreshMenu( PEGMENU pegMenu )
     SLsmg_set_color( iColourMenu );
     SLsmg_fill_region( pegMenu->iTop + pegMenu->iPrevious + 1,
                        pegMenu->iLeft + 1, 1, pegMenu->iWidth - 2, ' ' );
-    
+
     SLsmg_gotorc( pegMenu->iTop + pegMenu->iPrevious + 1, pegMenu->iLeft + 2 );
     WriteStringSane( pegMenu->pngMenu->entries[ pegMenu->iPrevious ].szName );
 
     SLsmg_set_color( iColourBar );
     SLsmg_fill_region( pegMenu->iTop + pegMenu->iCurrent + 1,
                        pegMenu->iLeft + 1, 1, pegMenu->iWidth - 2, ' ' );
-    
+
     SLsmg_gotorc( pegMenu->iTop + pegMenu->iCurrent + 1, pegMenu->iLeft + 2 );
     WriteStringSane( pegMenu->pngMenu->entries[ pegMenu->iCurrent ].szName );
 }
-
-

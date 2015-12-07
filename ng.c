@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -50,7 +50,7 @@ PNG OpenGuide( void )
             ng = (PNG) egmalloc( sizeof( NG ) );
 
             memset( ng, 0, sizeof( NG ) );
-            
+
             ng->file   = f;
             ng->header = (PNGHEADER) egmalloc( sizeof( NGHEADER ) );
 
@@ -64,7 +64,7 @@ PNG OpenGuide( void )
                 ng->header->iMenuCount++;
 
                 ng->lGuideStart = ftell( ng->file );
-                
+
                 ReadMenus( ng );
             }
             else
@@ -80,7 +80,7 @@ PNG OpenGuide( void )
             egperror( "Can't open '%s'", CurrentGuide( NULL ) );
         }
     }
-    
+
     return( ng );
 }
 
@@ -109,16 +109,16 @@ void CloseGuide( PNG ng )
                         }
                         free( ng->menus[ i ] );
                     }
-                    
+
                     free( ng->menus );
                 }
-            
+
                 free( ng->header );
             }
         }
 
         KillEntry( ng );
-        
+
         free( ng );
     }
 }
@@ -143,9 +143,9 @@ void ReadEntry( PNG ng, long lOffset )
     ng->entry = (PNGENTRY) egmalloc( sizeof( NGENTRY ) );
 
     memset( ng->entry, 0, sizeof( NGENTRY ) );
-    
+
     ng->entry->lAddress = lOffset;
-    
+
     fseek( ng->file, lOffset, SEEK_SET );
 
     iID = ReadWord( ng, 1 );
@@ -179,7 +179,7 @@ long FindFirstEntry( PNG ng )
 {
     long lOffset = 0L;
     int  iID;
-    
+
     fseek( ng->file, ng->lGuideStart, SEEK_SET );
 
     do
@@ -194,15 +194,15 @@ long FindFirstEntry( PNG ng )
                 lOffset = ftell( ng->file );
                 iID = 5;
                 break;
-                
+
             case 2 :
                 SkipSection( ng );
                 break;
-                
+
             default :
                 iID = 5;
         }
-            
+
     } while ( iID != 5 );
 
     return( lOffset );
@@ -235,7 +235,7 @@ static void ReadShortEntry( PNG ng )
 {
     int iItems;
     int i;
-    
+
     ng->entry->lOffset = ftell( ng->file ) - 2L;
 
     (void) ReadWord( ng, 1 );   /* Don't know what this is. */
@@ -274,7 +274,7 @@ static void ReadLongEntry( PNG ng )
 {
     int iItems;
     int iSeeAlsos;
-    
+
     ng->entry->lOffset = ftell( ng->file ) - 2L;
 
     (void) ReadWord( ng, 1 );
@@ -304,19 +304,19 @@ static void ReadLongEntry( PNG ng )
             int i;
 
             ng->entry->pSeeAlso = (PNGMENU) egmalloc( sizeof( NGMENU ) );
-            
+
             memset( ng->entry->pSeeAlso, 0, sizeof( NGMENU ) );
-            
+
             ng->entry->pSeeAlso->iEntries = iCount + 1;
-            
+
             ng->entry->pSeeAlso->entries = (PNGMENUENTRY)
                 egcalloc( iCount + 1, sizeof( NGMENUENTRY ) );
-            
+
             for ( i = 0; i < iCount; i++ )
             {
                 ng->entry->pSeeAlso->entries[ i ].lOffset = ReadLong( ng, 1 );
             }
-            
+
             for ( i = 0; i < iCount; i++ )
             {
                 GetStrZ( ng, ng->entry->pSeeAlso->entries[ i ].szName,
@@ -328,7 +328,7 @@ static void ReadLongEntry( PNG ng )
             iSeeAlsos = 0;
         }
     }
-    
+
     ng->entry->iVisTop  = 0;
     ng->entry->iVisBtm  = iItems >= DisplayRows() ? DisplayRows() - 1 :
         iItems - 1;
@@ -344,10 +344,10 @@ static void ReadLongEntry( PNG ng )
 static void ReadEntryText( PNG ng, int iLines )
 {
 #define _RET_BUFF 1024
-    
+
     char *pszBuffer = (char *) egmalloc( _RET_BUFF );
     int  i;
-    
+
     ng->entry->lines     = (char **) egcalloc( iLines, sizeof( char * ) );
     ng->entry->formatted = (char **) egcalloc( iLines, sizeof( char * ) );
     ng->entry->iLines    = iLines;
@@ -392,7 +392,7 @@ static void KillEntry( PNG ng )
             }
             free( ng->entry->pSeeAlso );
         }
-        
+
         free( ng->entry->lines );
         free( ng->entry );
 
@@ -407,14 +407,14 @@ static void ReadHeader( PNG ng )
     int i;
 
     /* Read the NG magic number. */
-    
+
     ng->header->iMagic = ReadWord( ng, 0 );
 
     /* Skip two shorts, I don't know what they are for. */
 
     (void) ReadWord( ng, 0 );
     (void) ReadWord( ng, 0 );
-    
+
     /* Read in the count of menus. */
 
     ng->header->iMenuCount = ReadWord( ng, 0 );
@@ -438,16 +438,16 @@ static void ReadMenus( PNG ng )
 {
     int iID;
     int i = 0;
-    
+
     ng->menus = (PNGMENU *) egcalloc( ng->header->iMenuCount, sizeof( PNGMENU ) );
 
     ng->menus[ i ] = (PNGMENU) egmalloc( sizeof( NGMENU ) );
     ng->menus[ i ]->iEntries = 0;
-    
+
     strcpy( ng->menus[ i ]->szName, "Expand" );
 
     ++i;
-    
+
     do
     {
         iID = ReadWord( ng, 1 );
@@ -476,14 +476,14 @@ static PNGMENU ReadMenu( PNG ng )
     PNGMENU menu = (PNGMENU) egmalloc( sizeof( NGMENU ) );
     int     i;
     long    l;
-    
+
     (void) ReadWord( ng, 1 );
 
     iItems = ReadWord( ng, 1 );
 
     menu->entries  = (PNGMENUENTRY) egcalloc( iItems, sizeof( NGMENUENTRY ) );
     menu->iEntries = iItems;
-    
+
     fseek( ng->file, 20L, SEEK_CUR );
 
     for ( i = 1; i < iItems; i++ )
@@ -505,7 +505,7 @@ static PNGMENU ReadMenu( PNG ng )
     }
 
     getc( ng->file );
-    
+
     return( (PNGMENU) menu );
 }
 
@@ -518,4 +518,3 @@ static void SkipSection( PNG ng )
 
     fseek( ng->file, (long) 22L + iLen, SEEK_CUR );
 }
-

@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -61,7 +61,7 @@ static void RestoreEgDir( void );
 int EGDir( int iRescan )
 {
     int iNewGuide = 0;
-    
+
     if ( iRescan || !iEntries )
     {
         if ( iRescan )
@@ -71,13 +71,13 @@ int EGDir( int iRescan )
         else
         {
             RestoreEgDir();
-            
+
             if ( !iEntries )
             {
                 MakeEgDir();
             }
         }
-        
+
         if ( !iEntries )
         {
             ShowError( "Can't locate any Norton Guides" );
@@ -97,7 +97,7 @@ int EGDir( int iRescan )
             }
         }
     }
-    
+
     return( iNewGuide );
 }
 
@@ -112,7 +112,7 @@ static void MakeEgDir( void )
     }
 
     DisplayMessage( "Scanning for Norton Guides...", 1 );
-    
+
     if ( ( iEntries = CountGuidesInPath() ) )
     {
         LoadInGuideDir();
@@ -135,7 +135,7 @@ static void KillDir( void )
     }
 
     free( egDir );
-    
+
     egDir    = (PEGDIR *) NULL;
     iEntries = 0;
 }
@@ -190,7 +190,7 @@ static int CountGuidesInDir( char *pszDir )
                 ++iGuides;
             }
         }
-        
+
         closedir( dir );
     }
 
@@ -203,7 +203,7 @@ static int CountGuidesInDir( char *pszDir )
 static void LoadInGuideDir( void )
 {
     egDir = egcalloc( iEntries, sizeof( PEGDIR ) );
-    
+
     if ( GuidePath( NULL ) )
     {
         char *pszPath = egmalloc( strlen( GuidePath( NULL ) + 1 ) );
@@ -241,14 +241,14 @@ static int LoadInGuidesFromDir( char *pszDir, int iGuide )
         while ( ( dire = readdir( dir ) ) )
         {
             sprintf( szFile, "%s" SLASHS "%s", pszDir, dire->d_name );
-            
+
             if ( IsAnNG( szFile, 0 ) )
             {
                 LoadInGuideDetails( pszDir, dire->d_name, iGuide );
                 ++iGuide;
             }
         }
-        
+
         closedir( dir );
     }
 
@@ -261,7 +261,7 @@ static int LoadInGuidesFromDir( char *pszDir, int iGuide )
 static void LoadInGuideDetails( char *pszPath, char *pszFile, int iGuide )
 {
     FILE *f;
-    
+
     egDir[ iGuide ] = (PEGDIR) egmalloc( sizeof( EGDIR ) );
 
     memset( egDir[ iGuide ], 0, sizeof( EGDIR ) );
@@ -287,7 +287,7 @@ static int DirSorter( const void *x, const void *y )
 {
     PEGDIR a = (PEGDIR) *( (PEGDIR *) x );
     PEGDIR b = (PEGDIR) *( (PEGDIR *) y );
-    
+
     return( strcasecmp( a->szTitle, b->szTitle ) );
 }
 
@@ -319,7 +319,7 @@ static int DirMenu( void )
         {
             SLsmg_set_color( iColourMenu );
             SLsmg_fill_region( iTop + 1, iLeft + 1, iHeight - 2, iWidth - 2, ' ' );
-            
+
             for ( i = iTopVis; i <= iBtmVis; i++ )
             {
                 SLsmg_gotorc( iTop + ( i - iTopVis ) + 1, iLeft + 1 );
@@ -340,7 +340,7 @@ static int DirMenu( void )
         SLsmg_write_string( egDir[ iCurrent ]->szTitle );
 
         SLsmg_gotorc( SLtt_Screen_Rows - 1, SLtt_Screen_Cols - 1 );
-        
+
         SLsmg_refresh();
 
         iLast = iCurrent;
@@ -355,20 +355,20 @@ static int DirMenu( void )
                 iChosen    = -1;
                 iSelecting = 0;
                 break;
-                
+
             case '\r' :
-                
+
                 iChosen    = iCurrent;
                 iSelecting = 0;
                 break;
-                
+
             case SL_KEY_UP :        /* Up one line */
             case 'K' :
             case 'k' :
             case SL_KEY_LEFT :
             case 'H' :
             case 'h' :
-                
+
                 if ( iCurrent )
                 {
                     if ( ( --iCurrent ) < iTopVis )
@@ -384,10 +384,10 @@ static int DirMenu( void )
             case SL_KEY_DOWN :      /* Down one line */
             case 'J' :
             case 'j' :
-            case SL_KEY_RIGHT :  
+            case SL_KEY_RIGHT :
             case 'L' :
             case 'l' :
-                
+
                 if ( iCurrent < ( iEntries - 1 ) )
                 {
                     if ( ( ++iCurrent ) > iBtmVis )
@@ -397,38 +397,38 @@ static int DirMenu( void )
                         iDirty = 1;
                     }
                 }
-                
+
                 break;
-                
+
             case SL_KEY_HOME :      /* Top of menu */
             case '<' :
-                
+
                 iCurrent = iLast = 0;
                 iTopVis  = 0;
                 iBtmVis  = ( iEntries > ( iHeight - 2 ) ? iHeight - 3 : iEntries - 1);
                 iDirty   = 1;
                 break;
-                
+
             case SL_KEY_END :       /* Bottom of menu */
             case '>' :
-                
+
                 iCurrent = iLast = ( iEntries - 1 );
                 iBtmVis  = iEntries - 1;
                 iTopVis  = ( iEntries > ( iHeight - 2 ) ? iBtmVis - ( iHeight - 3 ) : 0 );
                 iDirty   = 1;
                 break;
-                
+
             case SL_KEY_PPAGE :     /* Page up */
             case 0x02 :
             case 'B' :
             case 'b' :
-                
+
                 if ( iCurrent )
                 {
                     if ( iEntries > ( iHeight - 2 ) )
                     {
                         iCurrent -= ( iHeight - 3 );
-                        
+
                         if ( iCurrent < 0 )
                         {
                             iTopVis = iCurrent = 0;
@@ -444,23 +444,23 @@ static int DirMenu( void )
                     {
                         iCurrent = iLast = 0;
                     }
-                    
+
                     iDirty = 1;
                 }
-                
+
                 break;
-                
+
             case SL_KEY_NPAGE :     /* Page down (bottom of menu) */
             case 0x06 :
             case 'F' :
             case 'f' :
-                
+
                 if ( iCurrent < ( iEntries - 1 ) )
                 {
                     if ( iEntries > ( iHeight - 2 ) )
                     {
                         iCurrent += ( iHeight - 3 );
-                        
+
                         if ( iCurrent > ( iEntries - 1 ) )
                         {
                             iBtmVis  = iCurrent = ( iEntries - 1 );
@@ -476,10 +476,10 @@ static int DirMenu( void )
                     {
                         iCurrent = iLast = ( iEntries - 1 );
                     }
-                    
+
                     iDirty = 1;
                 }
-                
+
                 break;
         }
 
@@ -504,12 +504,12 @@ static void SaveEgDir( void )
             int i;
 
             fprintf( f, "%d\n", iEntries );
-            
+
             for ( i = 0; i < iEntries; i++ )
             {
                 fprintf( f, "%s\n%s\n", egDir[ i ]->szPath, egDir[ i ]->szTitle );
             }
-            
+
             fclose( f );
         }
     }
@@ -521,7 +521,7 @@ static void SaveEgDir( void )
 static void RestoreEgDir( void )
 {
     char szDirFile[ _POSIX_PATH_MAX ];
-    
+
     if ( egDir )
     {
         KillDir();
@@ -530,7 +530,7 @@ static void RestoreEgDir( void )
     if ( MakeHomeDotFile( "egdir", szDirFile ) )
     {
         FILE *f;
-        
+
         if ( ( f = fopen( szDirFile, "r" ) ) != NULL )
         {
             char szInFile[ 10 ];
@@ -538,28 +538,28 @@ static void RestoreEgDir( void )
             if ( fgets( szInFile, sizeof( szInFile ), f ) )
             {
                 int iInFile = atoi( szInFile );
-                
+
                 if ( iInFile > 0 )
                 {
                     int i;
-                    
+
                     iEntries = iInFile;
-                    
+
                     egDir = egcalloc( iEntries, sizeof( PEGDIR ) );
-                    
+
                     for ( i = 0; i < iEntries; i++ )
                     {
                         egDir[ i ] = (PEGDIR) egmalloc( sizeof( EGDIR ) );
-                        
+
                         fgets( egDir[ i ]->szPath, _POSIX_PATH_MAX, f );
                         fgets( egDir[ i ]->szTitle, 50, f );
-                        
+
                         egDir[ i ]->szPath[ strlen( egDir[ i ]->szPath ) - 1 ]   = 0;
                         egDir[ i ]->szTitle[ strlen( egDir[ i ]->szTitle ) - 1 ] = 0;
                     }
                 }
             }
-            
+
             fclose( f );
         }
     }

@@ -14,7 +14,7 @@ Changes since 0.04
 - Bit of code tweeking. Much of the code that delt with filesystem
   characters and had lots of "#ifdef DJGPP" is now more readable
   because the filesystem specific characters are defined in eg.h.
-  
+
 - Minor change to egperror().
 
 - When accepting a guide filename on the command line, eg was not
@@ -53,7 +53,7 @@ Changes since 0.02
 
 - Pressing 'd' or 'D' will bring up a menu of available Norton Guides.
   After an initial scan for guides the directory is held in ~/.egdir
-  and that is the one used until you force a scan using 'D' ('d' 
+  and that is the one used until you force a scan using 'D' ('d'
   will attempt to use the saved directory).
 
 - The menu contents were being written to the screen "raw", they now
@@ -66,7 +66,7 @@ Changes since 0.02
   are shown "raw". (Not applicable to DJGPP).
 
 - When a menu option (either normal or see also) is chosen the validity
-  of the entry it points is checked. If it is invalid the user is 
+  of the entry it points is checked. If it is invalid the user is
   informed and eg no longer bombs out with a fatal error.
 
 - As well as remembering what guide you had loaded last the location
@@ -184,5 +184,3 @@ Changes since 0.00
 - Guides with no menus are now handled correctly.
 
 - Added the help screen.
-
-

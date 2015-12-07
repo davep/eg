@@ -2,17 +2,17 @@
 
      Expert Guide - A Text Mode Norton Guide Reader
      Copyright (C) 1997-2015 David A Pearson
-   
+
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the license, or 
+     the Free Software Foundation; either version 2 of the license, or
      (at your option) any later version.
-     
+
      This program is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-     
+
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -79,16 +79,16 @@ char *FormatLine( char *pszBuffer, int iColour )
                 case 'a' :          /* Attribute */
                 case 'A' :
                     ++psz;
-                    iAttr = Hex2Byte( psz ); 
+                    iAttr = Hex2Byte( psz );
                     ++psz;
                     break;
-                    
+
                 case 'b' :          /* Bold */
                 case 'B' :
                     iAttr = ( iAttr == iColourBold ?
                               iColourNorm : iColourBold );
                     break;
-                    
+
                 case 'c' :          /* Character */
                 case 'C' :
                     ++psz;
@@ -102,26 +102,26 @@ char *FormatLine( char *pszBuffer, int iColour )
                     {
                         *pszTgt++ = (unsigned char) iAttr;
                     }
-                    ++iChar; 
+                    ++iChar;
                     break;
-                    
+
                 case 'n' :          /* Normal */
                 case 'N' :
                     iAttr = iColourNorm;
                     break;
-                    
+
                 case 'r' :          /* Reverse */
                 case 'R' :
                     iAttr = ( iAttr == iColourRev ?
                               iColourNorm : iColourRev );
                     break;
-                    
+
                 case 'u' :          /* Underlined */
                 case 'U' :
                     iAttr = ( iAttr == iColourUndl ?
                               iColourNorm : iColourUndl );
                     break;
-                    
+
                 case '^' :          /* A '^' character. */
                     *pszTgt++ = '^';
                     if ( iColour )
@@ -130,7 +130,7 @@ char *FormatLine( char *pszBuffer, int iColour )
                     }
                     ++iChar;
                     break;
-                    
+
                 default :           /* Bogus '^' */
                     --psz;
             }
@@ -138,14 +138,14 @@ char *FormatLine( char *pszBuffer, int iColour )
         else if ( *psz == (char) 0xFF ) /* RLE spaces */
         {
             /* RLE spaces are in the format 0xFF<Count>. */
-            
+
             int iSpaces;
             int i;
-            
+
             ++psz;
-            
+
             iSpaces = *psz;
-            
+
             for ( i = 0; i < iSpaces; i++ )
             {
                 *pszTgt++ = ' ';
@@ -163,14 +163,14 @@ char *FormatLine( char *pszBuffer, int iColour )
             {
                 *pszTgt = ' ';
             }
-            
+
             ++pszTgt;
-            
+
             if ( iColour )
             {
                 *pszTgt++ = (unsigned char) iAttr;
             }
-            
+
             ++iChar;
         }
 
@@ -202,11 +202,11 @@ static int Hex2Byte( char *psz )
     int iByte;
     int i;
     unsigned char bByte = 0;
-    
+
     for ( i = 0; i < 2; i++, psz++ )
     {
         *psz = (char) toupper( *psz );
-        
+
         if ( *psz > '/' && *psz < ':' )
         {
             iByte = ( ( (int) *psz ) - '0' );
@@ -219,10 +219,9 @@ static int Hex2Byte( char *psz )
         {
             iByte = 0;
         }
-        
+
         bByte += ( iByte * ( !i ? 16 : 1 ) );
     }
-    
+
     return( (int) bByte );
 }
-
