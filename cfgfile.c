@@ -122,19 +122,19 @@ int cfgReadFile( char *pszFile )
                 }
 
                 if ( *pszSplit )
-        	{
-		    *pszSplit = 0;
-		    ++pszSplit;
-		
-		    if ( *pszSplit )
-		    {
-			cfgAddOption( szBuffer, pszSplit );
-			++i;
-		    }
-		}
-	    }
-	}
-	fclose( f );
+                {
+                    *pszSplit = 0;
+                    ++pszSplit;
+
+                    if ( *pszSplit )
+                    {
+                        cfgAddOption( szBuffer, pszSplit );
+                        ++i;
+                    }
+                }
+            }
+        }
+        fclose( f );
     }
 
     return( i );
@@ -150,14 +150,14 @@ char *cfgGetSetting( char *pszId )
 
     while ( cfg && !p )
     {
-	if ( strcasecmp( pszId, cfg->id ) == 0 )
-	{
-	    p = cfg->value;
-	}
-	else
-	{
-	    cfg = (cfgOPTIONS *) cfg->next;
-	}
+        if ( strcasecmp( pszId, cfg->id ) == 0 )
+        {
+            p = cfg->value;
+        }
+        else
+        {
+            cfg = (cfgOPTIONS *) cfg->next;
+        }
     }
 
     return( p );
@@ -173,11 +173,11 @@ void cfgReset( void )
 
     while ( cfg )
     {
-	if ( cfg->id )    free( cfg->id );
-	if ( cfg->value ) free( cfg->value );
-	last = cfg;
-	cfg  = (cfgOPTIONS *) cfg->next;
-	free( last );
+        if ( cfg->id )    free( cfg->id );
+        if ( cfg->value ) free( cfg->value );
+        last = cfg;
+        cfg  = (cfgOPTIONS *) cfg->next;
+        free( last );
     }
 
     cfgOptions = (cfgOPTIONS *) NULL;
@@ -190,7 +190,7 @@ static cfgOPTIONS *cfgLastOption( cfgOPTIONS *p )
 {
     while ( p->next )
     {
-	p = p->next;
+        p = p->next;
     }
 
     return( p );
