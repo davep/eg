@@ -25,7 +25,7 @@
 
 #include <assert.h>  /* For the moment anyway */
 
-#define EG_VERSION   "1.01"     /* Version number. */
+#define EG_VERSION   "1.02"     /* Version number. */
 #define EG_ENV_PATH  "EG_PATH"  /* Environment variable that contains the
                                    path to the NG files. */
 
